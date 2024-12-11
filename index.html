@@ -1,0 +1,163 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="style.css">
+    <title>Facil_Agro</title>
+</head>
+<body>
+
+    <div class="container"> <!-- Esto es un comentario en HTML -->
+        <header>
+            <a href="index.html"><img class="logo" src="img/Logo.jpg" alt="Logo con link"></a>
+            <nav class="barraprincipal">
+                        <ul class="menu">
+                        <li><a href="index.html">Inicio</a></li>
+                        <li><a href="Calendario">Servicios</a></li>
+                        <li><a href="Gestion">Contacto</a></li>
+                    </ul>
+                </nav>
+        </header>
+        </nav>
+    <div class="container">
+        <h1>Calendario de Cultivos</h1>
+        
+        <!-- Calendario -->
+        <div>
+            <button id="prev-month">&#9664; Mes Anterior</button>
+            <span id="month-year"></span>
+            <button id="next-month">Mes Siguiente &#9654;</button>
+        </div>
+        <div class="calendar" id="calendar"></div>
+
+        <!-- Detalle de Eventos -->
+        <div id="event-details" class="hidden">
+            <h3>Eventos del día</h3>
+            <ul id="events-list"></ul>
+        </div>
+
+        <!-- Gestión de Cultivos -->
+        <div class="cultivos-section">
+            <h3>Gestión de Cultivos</h3>
+            <ul id="cultivos-list">
+                <li>Trigo</li>
+                <li>Maíz</li>
+            </ul>
+            <input type="text" id="nuevo-cultivo" placeholder="Agregar nuevo cultivo">
+            <button id="agregar-cultivo">Agregar Cultivo</button>
+        </div>
+
+        <!-- Planificar Siembras -->
+        <div class="form-section">
+            <h3>Planificar Siembra</h3>
+            <form id="siembra-form">
+                <label for="cultivo">Cultivo:</label>
+                <select id="cultivo">
+                    <option>Trigo</option>
+                    <option>Maíz</option>
+                </select><br>
+                <label for="area">Área a sembrar:</label>
+                <input type="number" id="area" min="1" required><br>
+                <label for="fecha">Fecha:</label>
+                <input type="date" id="fecha" required><br>
+                <button type="submit">Planificar</button>
+            </form>
+        </div>
+    </div>
+
+    <script>
+        const calendar = document.getElementById("calendar");
+        const monthYear = document.getElementById("month-year");
+        const prevMonth = document.getElementById("prev-month");
+        const nextMonth = document.getElementById("next-month");
+        const events = {}; // Almacenará eventos
+        let currentMonth = new Date().getMonth();
+        let currentYear = new Date().getFullYear();
+
+        function renderCalendar(month, year) {
+            calendar.innerHTML = "";
+            const firstDay = new Date(year, month, 1).getDay();
+            const daysInMonth = new Date(year, month + 1, 0).getDate();
+
+            for (let i = 0; i < firstDay; i++) {
+                calendar.insertAdjacentHTML("beforeend", `<div></div>`);
+            }
+
+            for (let day = 1; day <= daysInMonth; day++) {
+                const dateKey = `${year}-${month + 1}-${day}`;
+                const highlightClass = events[dateKey] ? "highlight" : "";
+                calendar.insertAdjacentHTML("beforeend", `<div class="${highlightClass}" data-date="${dateKey}">${day}</div>`);
+            }
+            monthYear.textContent = `${new Date(year, month).toLocaleString('default', { month: 'long' })} ${year}`;
+        }
+
+        function handleDateClick(e) {
+            if (e.target.dataset.date) {
+                const date = e.target.dataset.date;
+                const eventDetails = document.getElementById("event-details");
+                const eventsList = document.getElementById("events-list");
+
+                eventsList.innerHTML = "";
+                if (events[date]) {
+                    events[date].forEach(event => {
+                        eventsList.insertAdjacentHTML("beforeend", `<li>${event}</li>`);
+                    });
+                } else {
+                    eventsList.innerHTML = "<li>No hay eventos</li>";
+                }
+                eventDetails.classList.remove("hidden");
+            }
+        }
+
+        function handleAddEvent(e) {
+            e.preventDefault();
+            const cultivo = document.getElementById("cultivo").value;
+            const area = document.getElementById("area").value;
+            const fecha = document.getElementById("fecha").value;
+
+            if (!events[fecha]) {
+                events[fecha] = [];
+            }
+            events[fecha].push(`${cultivo} - Área: ${area}`);
+            renderCalendar(currentMonth, currentYear);
+            alert("Evento añadido");
+        }
+
+        function handleAddCultivo() {
+            const nuevoCultivo = document.getElementById("nuevo-cultivo").value;
+            if (nuevoCultivo) {
+                const cultivosList = document.getElementById("cultivos-list");
+                cultivosList.insertAdjacentHTML("beforeend", `<li>${nuevoCultivo}</li>`);
+                const cultivoSelect = document.getElementById("cultivo");
+                cultivoSelect.insertAdjacentHTML("beforeend", `<option>${nuevoCultivo}</option>`);
+                document.getElementById("nuevo-cultivo").value = "";
+            }
+        }
+
+        prevMonth.addEventListener("click", () => {
+            currentMonth--;
+            if (currentMonth < 0) {
+                currentMonth = 11;
+                currentYear--;
+            }
+            renderCalendar(currentMonth, currentYear);
+        });
+
+        nextMonth.addEventListener("click", () => {
+            currentMonth++;
+            if (currentMonth > 11) {
+                currentMonth = 0;
+                currentYear++;
+            }
+            renderCalendar(currentMonth, currentYear);
+        });
+
+        calendar.addEventListener("click", handleDateClick);
+        document.getElementById("siembra-form").addEventListener("submit", handleAddEvent);
+        document.getElementById("agregar-cultivo").addEventListener("click", handleAddCultivo);
+
+        renderCalendar(currentMonth, currentYear);
+    </script>
+</body>
+</html>
