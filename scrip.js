@@ -162,3 +162,14 @@ document.getElementById("agregar-cultivo").addEventListener("click", handleAddCu
 document.getElementById("clear-events").addEventListener("click", handleClearEvents);
 
 renderCalendar(currentMonth, currentYear);
+
+
+//prueba de boton 
+
+const menuButton = document.getElementById("menu-button");
+const mainMenu = document.getElementById("main-menu");
+
+// Alternar la visibilidad del menú al hacer clic en el botón
+menuButton.addEventListener("click", () => {
+    mainMenu.classList.toggle("hidden");
+});

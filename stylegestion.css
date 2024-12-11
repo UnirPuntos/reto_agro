@@ -1,0 +1,139 @@
+*
+/*Estilos del menu*/
+ol,
+ul {
+    list-style: none;
+}
+
+a {
+    text-decoration: none;
+}
+
+
+header nav ul li a {
+    color: black;
+}
+
+header {
+    display: flex;
+    height: 7rem;
+    background-color: greenyellow;
+    align-items: center;
+    justify-content: space-between;
+}
+
+
+
+header nav ul {
+    display: flex;
+    gap: 1.5rem;
+    list-style: none;
+    color: black;
+    padding-right: 4rem;
+    font-size: 1.5rem;
+}
+
+.logo {
+    padding-left: 5rem;
+    height: 5rem;
+    width: 5rem;
+}
+
+.header{
+  background-color: rgba(209, 29, 29, 0.5);
+  width: 100%;
+  height: 9em;
+  display: flex;
+  flex-direction: row;
+  overflow: hidden;
+}
+.header-index{
+  background-color: greenyellow;
+  width: 100%;
+  height: 4em;
+  display: flex;
+  flex-direction: row;
+  overflow: hidden;
+  align-content: center;
+}
+.menu-nav {
+  height: 80px;
+  display: flex;
+  align-items: center;
+}
+
+
+
+.logo {
+  max-width: 110px;
+}
+
+.menu {
+  text-align: center;
+  margin: 0 20px;
+  display: flex;
+  list-style: none;
+  padding: 0 50px;
+  gap: 15px;
+}
+
+.btn-menu {
+  text-decoration: none;
+  font-weight: bold;
+  color: rgb(252, 251, 251);
+  padding: 5px;
+  cursor: pointer;
+  font-size: 16px;
+  padding: 10px 20px;
+  border-radius: 5px; /* Bordes redondeados */
+  transition: background-color 0.3s; /* Efecto de transición */
+}
+
+.btn-menu:hover {
+  color: rgb(177, 175, 174);
+  background-color: rgba(0, 0, 0, 0.5);
+}
+
+.activo {
+  background-color: rgb(255, 255, 255);
+  color: black;
+  border: 1px solid;
+  border-radius: 5px;
+}
+
+/* Tabla de gestión */
+.gestion-table {
+    width: 100%;
+    border-collapse: collapse;
+    margin-top: 20px;
+    font-family: Arial, sans-serif;
+    font-size: 16px;
+    background-color: #f9f9f9;
+    border: 1px solid #ddd;
+}
+
+.gestion-table th,
+.gestion-table td {
+    text-align: left;
+    padding: 10px;
+    border: 1px solid #ddd;
+}
+
+.gestion-table th {
+    background-color: #4caf50;
+    color: white;
+}
+
+.clear-button {
+    background-color: #d9534f;
+    color: white;
+    border: none;
+    padding: 10px 20px;
+    margin-top: 10px;
+    cursor: pointer;
+    border-radius: 5px;
+}
+
+.clear-button:hover {
+    background-color: #c9302c;
+}

@@ -1,24 +1,33 @@
 <!DOCTYPE html>
-<html lang="es">
+<html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
+    <link rel="stylesheet" href="stylegestion.css">
+    <title>Gestión de Cultivos</title>
 </head>
 <body>
+
     
-    <div class="container"> <!-- Esto es un comentario en HTML -->
-        <header>
-            <a href="index.html"><img class="logo" src="img/Logo.jpg" alt="Logo con link"></a>
-            <nav class="barraprincipal">
-                        <ul class="menu">
-                        <li><a href="index.html">Inicio</a></li>
-                        <li><a href="Calendario">Servicios</a></li>
-                        <li><a href="Gestion">Contacto</a></li>
-                    </ul>
-                </nav>
-        </header>
-        </nav>
+
     <div class="container">
+        <h1>Gestión de Cultivos</h1>
+        <table id="gestion-table" class="gestion-table">
+            <thead>
+                <tr>
+                    <th>Fecha</th>
+                    <th>Cultivo</th>
+                    <th>Área</th>
+                    <th>Estado</th>
+                    <th>Detalles</th>
+                </tr>
+            </thead>
+            <tbody>
+                <!-- Los datos serán cargados dinámicamente -->
+            </tbody>
+        </table>
+        <button id="clear-all" class="clear-button">Eliminar Todos los Registros</button>
+    </div>
+    <script src="gestion.js"></script>
 </body>
 </html>
